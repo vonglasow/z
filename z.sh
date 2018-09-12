@@ -138,12 +138,9 @@ _z() {
         local cd
         cd="$( < <( _z_dirs ) awk -v t="$(date +%s)" -v list="$list" -v typ="$typ" -v q="$fnd" -F"|" '
             function frecent(rank, time) {
-                # relate frequency and time
-                dx = t - time
-                if( dx < 3600 ) return rank * 4
-                if( dx < 86400 ) return rank * 2
-                if( dx < 604800 ) return rank / 2
-                return rank / 4
+              # relate frequency and time
+              dx = t - time
+              return sprintf("%.20f", rank * (1/dx))
             }
             function output(matches, best_match, common) {
                 # list or return the desired directory
