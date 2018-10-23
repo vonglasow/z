@@ -142,7 +142,7 @@ _z() {
             function frecent(rank, time) {
               # relate frequency and time
               dx = t - time
-              return rank / log(dx)
+              return rank / (log(dx) || 1)
             }
             function output(matches, best_match, common) {
                 # list or return the desired directory
